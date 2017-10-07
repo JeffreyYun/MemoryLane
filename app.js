@@ -60,16 +60,6 @@ io.sockets.on('connection', function (socket) {
     fs.writeFile(imgNewURL, buf);
     fs.appendFile('./public/pictures/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
   });
-
-  socket.on('img' , function (data) {
-    var now = new time.Date();
-    var url = data.imgURL.replace(/^data:image\/\w+;base64,/, "");
-    var buf = new Buffer(url, 'base64');
-    var imgNewURL='./public/'+data.name+now.toString().replace(/\s/g, '')+'.png'
-    fs.writeFile(imgNewURL, buf);
-    fs.appendFile('./public/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
-  });
-
 });
 
 
