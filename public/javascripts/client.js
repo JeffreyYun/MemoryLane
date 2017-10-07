@@ -1,22 +1,25 @@
-var video, canvas, context, labels, socket, name;
-alert("loading")
+var video, canvas, context, labels, socket, name, loc;
+
 window.onload = function(){
-    alert("loaded")
+
     //for heroku builds
     //var target="https://image-classifier-bot.herokuapp.com/"
     var target='http://localhost:3000'
     // Grab elements, create settings, etc.
     socket = io.connect(target);
     video = document.getElementById('video');
+    loc = document.getElementById("location");
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
     labels = document.getElementsByTagName('label');
     let camera_works=access_video();
 
     if (!camera_works){
-
-      alert("Failed to gain access to your camera.");
+      alert("Video is not supported by this browser/device.");
      }
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by this browser.");
+    }
 }
 
 function access_video(){
@@ -45,3 +48,14 @@ document.getElementById("snap").addEventListener("click", function() {
        socket.emit('img',canvas.toDataURL());
 });
 
+
+function getLocation() {
+    if (navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+}
+
+function showPosition(position) {
+    loc.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
