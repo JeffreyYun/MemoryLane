@@ -1,34 +1,36 @@
 
 <% include ./partials/header %>
-
-
     <div id="labels_box">
       <div id="labels">
-
       </div>
     </div>
-
-      <div id="logs_box">
-
-        <br>
-        <h2>Logs</h2>
-        <br>
-
-        <p>
-        POST Memories Posts Here
-        </p>
-
-      </div>
-
+    <div id="logs_box">
+      <br>
+      <h2>Logs</h2>
+      <br>
+      <p>
+      POST Memories Posts Here
+      </p>
+    </div>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
     <script  src="js/index.js"></script>
 
-    <!--- Built in to client by socket.io -->
-    <script src="/socket.io/socket.io.js"></script>
-    <!--- client code -->
-    <script src="/javascripts/client.js"></script>
+    <% var total = [] %>
+    <% var data = result.split('\n') %>
+    <% data.splice(-1,1) %>
+
+        <% for (var dat of data){ %>
+            <% da = dat.split(';') %>
+            <% total.push(da) %>
+     <% }  %>
+
+      <div>
+         <% for (var tat of total){ %>
+            <img src=<%="pictures/"+tat[3]%> alt="Failed to display">
+     <% } %>
+     </div>
 
   </body>
 </html>

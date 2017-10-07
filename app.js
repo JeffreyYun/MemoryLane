@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require("mongoose");
 var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
@@ -10,13 +11,13 @@ var mongoose    = require("mongoose"),
     passport    = require("passport"),
     LocalStrategy= require("passport-local"),
     methodOverride  = require("method-override");
-
 var app = express();
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var time = require('time')(Date);
 var index = require('./routes/index');
+var Image = require("./models/image");
 var User = require("./models/user");
 
 
@@ -38,7 +39,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
 mongoose.Promise = global.Promise;
-
+mongoose.connect(process.env.DB_URL, {useMongoClient: true});
 
 // Passport configuration
 app.use(require("express-session")({
@@ -60,8 +61,7 @@ app.use(function(req, res, next){
     next();
 });
 
-
-app.use("", index);
+app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -86,15 +86,15 @@ io.sockets.on('connection', function (socket) {
     var now = new time.Date();
     var url = data.imgURL.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(url, 'base64');
-    var imgNewURL='./public/pictures/'+data.name+now.toString().replace(/\s/g, '')+'.png'
-    fs.writeFile(imgNewURL, buf);
-    fs.appendFile('./public/pictures/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
+    var imgNewURL=data.name+now.toString().replace(/\s|\:|\(|\)|\-/g, '')+'.png'
+    fs.writeFile('./public/pictures/'+imgNewURL, buf);
+    fs.appendFile('./public/pictures/info.txt', data.name+";"+data.loc+";"+now.toString()+";"+imgNewURL+'\n');
   });
 });
 
 
 
 server.listen(process.env.PORT, process.env.IP,function(){
-  console.log("App started on localhost:"+process.env.PORT);
+  //console.log("App started on localhost:"+process.env.PORT);
 });
 

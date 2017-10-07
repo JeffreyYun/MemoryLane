@@ -2,25 +2,46 @@
 <% include ./partials/header %>
 
     <div id="labels_box">
-      <div id="labels">
+        <div id="labels">
 
-      </div>
+        </div>
     </div>
+
+    <% if (!currentUser){ %>
+
+        <div id="prelogin_box">
+          <a href="/join" class="btn btn-lg btn-info">Create an Account</a>
+
+          <br><br>
+
+          <a href="/login" class="btn btn-lg btn-success">Log In</a>
+        </div>
+
+    <% } else { %>
 
     <div id="profile_box">
 
       <img src="images/generic-avatar.png" alt="generic_avatar" id="profile-image"/>
 
-      <p>
-      Username:
-      </p>
-      <p>
-      Joined:
-      </p>
-      <p>
-      Locations:
-      </p>
+        <br>
+        <h2>Profile</h2>
+        <br>
 
-  </div>
+        <p>
+        Username:
+        </p>
+        <p>
+        Joined:
+        </p>
+        <p>
+        Locations:
+        </p>
+
+    </div>
+
+    <br>
+    <a href="/logout" class="btn btn-lg btn-info">Log Out</a>
+
+    <% } %>
 
 <% include ./partials/footer %>
