@@ -16,6 +16,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var time = require('time')(Date);
 var index = require('./routes/index');
+var User = require("./models/user");
 
 
 // view engine setup
@@ -33,12 +34,9 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(__dirname + '/public'));
-app.use(methodOverride("_method"));
-
 
 
 app.use('/', index);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
