@@ -13,4 +13,14 @@ router.get('/help', function(req, res, next) {
     res.render('help', { result: "nothing yet" });
 });
 
+// TODO: Add POST route to logs
+// TODO: CREATE, READ, UPDATE, DESTROY
+router.get('/logs', function(req, res, next) {
+    res.render('logs', { result: "nothing yet" });
+});
+
+router.get('/profile', function(req, res, next) {
+    res.render('profile', { result: "nothing yet" });
+});
+
 module.exports = router;
