@@ -41,7 +41,8 @@ body {
   padding: 25px;
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
-  transition-duration: 0.5s; }
+  transition-duration: 0.5s;
+  color: #FFFFFF; }
 
 #snap:hover {
   background-color: #333333; }
