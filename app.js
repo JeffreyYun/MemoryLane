@@ -18,7 +18,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var time = require('time')(Date);
 var index = require('./routes/index');
-//var Image = require("./models/image");
+var Image = require("./models/image");
 //var User = require("./models/user");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,7 +38,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
 mongoose.Promise = global.Promise;
-//mongoose.connect(process.env.DB_URL, {useMongoClient: true});
+mongoose.connect(process.env.DB_URL, {useMongoClient: true});
 
 // Passport configuration
 app.use(require("express-session")({
