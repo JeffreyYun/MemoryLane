@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 
 var router = express.Router();
+//var User = require("../models/user");
 
 router.get('/', function(req, res, next) {
 	res.render('index', { result: "nothing yet" });

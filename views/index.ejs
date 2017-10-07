@@ -8,16 +8,21 @@
           <p id="location"></p>
 
       </div>
+    <div id="labels_box">
+      <div id="labels">
 
+      </div>
+    </div>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
-    <script  src="js/index.js"></script>
+    <div id="video_box">
 
-    <!--- Built in to client by socket.io -->
-    <script src="/socket.io/socket.io.js"></script>
-    <!--- client code -->
-    <script src="/javascripts/client.js"></script>
+        <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
+        <br>
+        <button id="snap"><i id="camera-icon" class="fa fa-camera"></i></button>
+        <canvas id="canvas" width="640" height="480"></canvas>
 
-  </body>
-</html>
+        <p id="location"></p>
+
+    </div>
+
+<% include ./partials/footer %>
