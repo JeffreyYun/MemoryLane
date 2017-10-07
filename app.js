@@ -11,7 +11,6 @@ var mongoose    = require("mongoose"),
     passport    = require("passport"),
     LocalStrategy= require("passport-local"),
     methodOverride  = require("method-override");
-
 var app = express();
 
 var server = require('http').Server(app);
