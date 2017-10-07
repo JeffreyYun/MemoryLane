@@ -2,29 +2,36 @@
 <% include ./partials/header %>
 
     <div id="labels_box">
-      <div id="labels">
+        <div id="labels">
 
-      </div>
+        </div>
     </div>
+
+    <% if (!currentUser){ %>
+        <br>
+        <a href="/join" class="btn btn-lg btn-info">Create an Account</a>
+    <% } else { %>
 
     <div id="profile_box">
 
-      <!-- TODO: add circular image -->
+        <!-- TODO: add circular image -->
 
-      <br>
-      <h2>Profile</h2>
-      <br>
+        <br>
+        <h2>Profile</h2>
+        <br>
 
-      <p>
-      Username:
-      </p>
-      <p>
-      Joined:
-      </p>
-      <p>
-      Locations:
-      </p>
+        <p>
+        Username:
+        </p>
+        <p>
+        Joined:
+        </p>
+        <p>
+        Locations:
+        </p>
 
-  </div>
+    </div>
+
+    <% } %>
 
 <% include ./partials/footer %>
