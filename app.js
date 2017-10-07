@@ -5,12 +5,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var sassMiddleware = require('node-sass-middleware');
+var flash       = require("connect-flash");
+var passport    = require("passport"),
+    LocalStrategy= require("passport-local"),
+    methodOverride  = require("method-override");
+
 var app = express();
+
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var time = require('time')(Date);
-
-
 var index = require('./routes/index');
 
 
@@ -28,7 +32,10 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
+app.use(methodOverride("_method"));
+
+
 
 app.use('/', index);
 
