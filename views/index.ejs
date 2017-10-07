@@ -1,6 +1,13 @@
-
 <% include ./partials/header %>
+      <div id="video_box">
 
+          <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
+          <button id="snap">Snap Photo</button>
+          <canvas id="canvas" width="640" height="480"></canvas>
+
+          <p id="location"></p>
+
+      </div>
     <div id="labels_box">
       <div id="labels">
 
@@ -10,7 +17,8 @@
     <div id="video_box">
 
         <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
-        <button id="snap">Snap Photo</button>
+        <br>
+        <button id="snap"><i id="camera-icon" class="fa fa-camera"></i></button>
         <canvas id="canvas" width="640" height="480"></canvas>
 
         <p id="location"></p>

@@ -2,13 +2,10 @@ var video, canvas, context, labels, socket, name, loc, my_username;
 
 
 window.onload = function(){
-
     //for heroku builds
     //var target="https://image-classifier-bot.herokuapp.com/"
     var target='http://localhost:3000'
-
     my_username='Jennie'
-
     // Grab elements, create settings, etc.
     socket = io.connect(target);
     video = document.getElementById('video');
