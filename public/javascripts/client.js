@@ -49,11 +49,11 @@ document.getElementById("snap").addEventListener("click", function() {
 
     function processPosition(position) {
         //show in html5
-        loc.innerHTML = position.coords.latitude +
-        "," + position.coords.longitude;
+        loc.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
         //let server know
-        let pos_str="Latitude:" + position.coords.latitude +
-        ",Longitude:" + position.coords.longitude;
+        let pos_str= position.coords.latitude +
+        " " + position.coords.longitude;
         socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str } );
 
     }

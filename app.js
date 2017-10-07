@@ -58,7 +58,7 @@ io.sockets.on('connection', function (socket) {
     var buf = new Buffer(url, 'base64');
     var imgNewURL='./pictures/'+data.name+now.toString().replace(/\s/g, '')+'.png'
     fs.writeFile(imgNewURL, buf);
-    fs.appendFile('./pictures/info.txt', data.name+"; "+data.loc+"; "+now.toString()"; "+imgNewURL+'\n');
+    fs.appendFile('./pictures/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
   });
 });
 
