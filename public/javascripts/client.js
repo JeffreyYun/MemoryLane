@@ -1,10 +1,14 @@
-var video, canvas, context, labels, socket, name, loc;
+var video, canvas, context, labels, socket, name, loc,my_username;
+
 
 window.onload = function(){
 
     //for heroku builds
     //var target="https://image-classifier-bot.herokuapp.com/"
     var target='http://localhost:3000'
+
+    my_username='Jennie'
+
     // Grab elements, create settings, etc.
     socket = io.connect(target);
     video = document.getElementById('video');
@@ -27,7 +31,7 @@ function access_video(){
   if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     //lower framerate
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", frameRate: { ideal: 10, max: 15 },
-      width: 512, height: 512  } }).then(function(stream) {
+      width: 640, height: 480  } }).then(function(stream) {
           video.src = window.URL.createObjectURL(stream);
           video.play();
       });
@@ -40,22 +44,20 @@ function access_video(){
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
     context.drawImage(video, 0, 0, 640, 480);
-      //note this URL changes for every new canvas draw.
-      //must be sent every time
-      var data = canvas.toDataURL('image/png');
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-       alert("sending")
-       socket.emit('img',canvas.toDataURL());
+
+    navigator.geolocation.getCurrentPosition(processPosition);
+
+    function processPosition(position) {
+        //show in html5
+        loc.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+        //let server know
+        let pos_str="Latitude:" + position.coords.latitude +
+        ",Longitude:" + position.coords.longitude;
+        socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str } );
+
+    }
+
+
 });
 
-
-function getLocation() {
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(showPosition);
-
-}
-
-function showPosition(position) {
-    loc.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-}

@@ -13,14 +13,7 @@ h1 {
 
 video {
   display: block;
-  margin: 0 auto;
-  height: 70%;
-  max-height: 430px; }
-
-@media (max-width: 500px) {
-  video {
-    width: 80%;
-    height: auto; } }
+  margin: 0 auto; }
 
 #about {
   position: fixed;
@@ -63,8 +56,5 @@ h1 {
 
 #header_box {
   padding: 1em; }
-
-canvas {
-  display: none; }
 
 /*# sourceMappingURL=style.css.map */

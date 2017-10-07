@@ -52,13 +52,13 @@ app.use(function(err, req, res, next) {
 
 
 io.sockets.on('connection', function (socket) {
-
-  socket.on('img' , function (imgURL) {
+  socket.on('img' , function (data) {
     var now = new time.Date();
-    console.log(now);
-    var url = imgURL.replace(/^data:image\/\w+;base64,/, "");
+    var url = data.imgURL.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(url, 'base64');
-    fs.writeFile('./pictures/'+now.toString()+'.png', buf);
+    var imgNewURL='./pictures/'+data.name+now.toString().replace(/\s/g, '')+'.png'
+    fs.writeFile(imgNewURL, buf);
+    fs.appendFile('./pictures/info.txt', data.name+", "+data.loc+", "+imgNewURL+'\n');
   });
 });
 
