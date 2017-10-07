@@ -1,35 +1,60 @@
 <% include ./partials/header %>
 
 <body>
+    <div id="header_box">
+       <h1> Memory Lane </h1>
+
+       <div class="mynavbar container">
+          <div class="row">
+
+              <div class="col-1"></div>
+
+              <div class="col-2">
+                <i class="fa fa-user" aria-hidden="true"></i></div>
+
+                <div class="col-2"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
+
+                <div class="col-2"><i class="fa fa-camera" aria-hidden="true"></i>
+                </div>
+
+                <div class="col-2">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></div>
+
+                    <div class="col-2"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+
+                    <div class="col-1"></div>
+
+                </div>
+            </div>
+
+        </div>
 
 
-<div id="header_box">
- <h1> Memory Lane </h1>
- <button id="about_button" data-toggle="collapse" data-target="#about">Help/About</button>
- </div>
-<div "about_box">
-<div id="about" class="collapse">
-<h4>About this</h4>
-</div>
+        <div id="labels_box">
+          <div id="labels">
+
+          </div>
+      </div>
+      <div id="video_box">
+
+          <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
+          <button id="snap">Snap Photo</button>
+          <canvas id="canvas" width="640" height="480"></canvas>
+
+          <p id="location"></p>
 
 
-  <div id="labels_box">
-  <div id="labels">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
 
-  </div>
-  </div>
-  <div id="video_box">
+    <script  src="js/index.js"></script>
 
-  <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
-<button id="snap">Snap Photo</button>
-<canvas id="canvas" width="640" height="480"></canvas>
+          <!--- Built in to client by socket.io -->
+          <script src="/socket.io/socket.io.js"></script>
+          <!--- client code -->
+          <script src="/javascripts/client.js"></script>
 
-<p id="location"></p>
-  <!--- Built in to client by socket.io -->
-  <script src="/socket.io/socket.io.js"></script>
-  <!--- client code -->
-  <script src="/javascripts/client.js"></script>
-</script>
-</body>
 
+
+  </body>
 </html>

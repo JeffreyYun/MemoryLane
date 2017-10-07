@@ -7,7 +7,7 @@ gulp.task('default', function() {
     livereload.listen();
     nodemon({
         script: 'app.js',
-        ext: 'js'
+        ext: 'js html ejs sass'
     }).on('restart', function(){
         gulp.src('app.js')
             .pipe(livereload())
