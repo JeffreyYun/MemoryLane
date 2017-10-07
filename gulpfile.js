@@ -5,7 +5,6 @@ var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var sass        = require('gulp-sass');
 var browserSync = require('browser-sync');
-var nodemon = require('gulp-nodemon');
 
 // delay browser reloading after nodemon start
 var BROWSER_SYNC_RELOAD_DELAY = 500;
