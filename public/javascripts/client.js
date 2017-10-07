@@ -1,4 +1,4 @@
-var video, canvas, context, labels, socket, name, loc,my_username;
+var video, canvas, context, labels, socket, name, loc, my_username;
 
 
 window.onload = function(){
