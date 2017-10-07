@@ -1,14 +1,13 @@
 #quick start:
 # express --view ejs --css sass --git
 # npm install
-
-
+# . ./exports.sh
 
 view:
 	google-chrome index.html
 
 push:
-	git add *
+	git add .
 	echo -n "Message: "
 	read msg; \
 	echo "git commit -am" $$msg; \
