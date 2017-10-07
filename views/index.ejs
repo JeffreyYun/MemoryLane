@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> MemoLocs </title>
+  <!-- Bootstrap css -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Bootstrap js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+
+<div id="header_box">
+ <h1> Memory Lane </h1>
+ <button id="about_button" data-toggle="collapse" data-target="#about">Help/About</button>
+ </div>
+<div "about_box">
+<div id="about" class="collapse">
+<h4>About this</h4>
+</div>
+
+
+  <div id="labels_box">
+  <div id="labels">
+
+  </div>
+  </div>
+  <div id="video_box">
+
+  <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+  <!--- Built in to client by socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!--- client code -->
+  <script src="/javascripts/client.js"></script>
+</script>
+</body>
+
+</html>
