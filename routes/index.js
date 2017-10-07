@@ -1,4 +1,6 @@
 var express = require('express');
+var fs = require('fs');
+
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -16,7 +18,9 @@ router.get('/help', function(req, res, next) {
 // TODO: Add POST route to logs
 // TODO: CREATE, READ, UPDATE, DESTROY
 router.get('/logs', function(req, res, next) {
-    res.render('logs', { result: "nothing yet" });
+    fs.readFile('public/pictures/info.txt', 'utf8', function(err, contents) {
+        res.render('logs', { result: contents });
+    });
 });
 
 router.get('/profile', function(req, res, next) {
