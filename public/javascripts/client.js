@@ -44,7 +44,6 @@ function access_video(){
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
     context.drawImage(video, 0, 0, 640, 480);
-
     navigator.geolocation.getCurrentPosition(processPosition);
 
     function processPosition(position) {
@@ -55,9 +54,6 @@ document.getElementById("snap").addEventListener("click", function() {
         let pos_str= position.coords.latitude +
         " " + position.coords.longitude;
         socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str } );
-
     }
-
-
 });
 

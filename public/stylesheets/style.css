@@ -57,4 +57,8 @@ h1 {
 #header_box {
   padding: 1em; }
 
+#snap {
+  margin: auto;
+  display: block; }
+
 /*# sourceMappingURL=style.css.map */

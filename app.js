@@ -56,11 +56,23 @@ io.sockets.on('connection', function (socket) {
     var now = new time.Date();
     var url = data.imgURL.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(url, 'base64');
-    var imgNewURL='./pictures/'+data.name+now.toString().replace(/\s/g, '')+'.png'
+    var imgNewURL='./public/'+data.name+now.toString().replace(/\s/g, '')+'.png'
     fs.writeFile(imgNewURL, buf);
-    fs.appendFile('./pictures/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
+    fs.appendFile('./public/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
   });
+
+  socket.on('img' , function (data) {
+    var now = new time.Date();
+    var url = data.imgURL.replace(/^data:image\/\w+;base64,/, "");
+    var buf = new Buffer(url, 'base64');
+    var imgNewURL='./public/'+data.name+now.toString().replace(/\s/g, '')+'.png'
+    fs.writeFile(imgNewURL, buf);
+    fs.appendFile('./public/info.txt', data.name+"; "+data.loc+"; "+now.toString()+"; "+imgNewURL+'\n');
+  });
+
 });
+
+
 
 server.listen(process.env.PORT, process.env.IP,function(){
   console.log("App started on localhost:"+process.env.PORT);
