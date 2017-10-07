@@ -8,8 +8,15 @@
     </div>
 
     <% if (!currentUser){ %>
-        <br>
-        <a href="/join" class="btn btn-lg btn-info">Create an Account</a>
+
+        <div id="prelogin_box">
+          <a href="/join" class="btn btn-lg btn-info">Create an Account</a>
+
+          <br><br>
+
+          <a href="/login" class="btn btn-lg btn-success">Log In</a>
+        </div>
+
     <% } else { %>
 
     <div id="profile_box">
@@ -31,6 +38,9 @@
         </p>
 
     </div>
+
+    <br>
+    <a href="/logout" class="btn btn-lg btn-info">Log Out</a>
 
     <% } %>
 

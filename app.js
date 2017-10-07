@@ -19,7 +19,9 @@ var io = require('socket.io')(server);
 var time = require('time')(Date);
 var index = require('./routes/index');
 var Image = require("./models/image");
-//var User = require("./models/user");
+var User = require("./models/user");
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -46,13 +48,12 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false,    // security
 }));
-/*
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());       // determines subset user data to store in session (serialized user)
 passport.deserializeUser(User.deserializeUser());   // matches key to user, passing entire user object
-*/
+
 // middleware, passes currentUser to all routes
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
@@ -60,7 +61,6 @@ app.use(function(req, res, next){
     res.locals.success = req.flash("success");
     next();
 });
-
 
 app.use("/", index);
 
