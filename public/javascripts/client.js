@@ -67,7 +67,7 @@ document.getElementById("snap").addEventListener("click", function() {
     navigator.geolocation.getCurrentPosition(processPosition);
 })
 
-   $("$snap").on('click',function(){
+   $("#snap").on('click',function(){
         context.drawImage(video, 0, 0, 640, 480);
         $("#picture_wrapper").css({'display':'block'})
         $("#video_box").css({'display':'none'})
