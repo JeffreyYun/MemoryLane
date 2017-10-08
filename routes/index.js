@@ -37,19 +37,12 @@ router.get("/join", function(req, res){
     res.render("join");
 });
 
-// sign up the user
-router.post("/join", function(req, res){
-    var newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, function(err, user){
-       if(err){
-           req.flash("error", err.message);
-           return res.redirect("join");
-       }
-       passport.authenticate("local")(req, res, function(){
-           req.flash("success", "Welcome to MemoryLane, " + user.username);
-       });
-   });
-});
+// process the signup form
+router.post('/join', passport.authenticate('local-signup', {
+    successRedirect : '/profile', // redirect to the secure profile section
+    failureRedirect : '/join', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
 
 // show login form
 router.get("/login", function(req, res){
@@ -58,13 +51,12 @@ router.get("/login", function(req, res){
 
 // log in the user
 // (page, middleware, callback)
-router.post("/login", passport.authenticate("local",
+router.post("/login", passport.authenticate("local-login",
     {
-        successRedirect: "/talks",
-        failureRedirect: "/login"
-        // IF FAILURE: req.flash("error", "Incorrect username/password."); refer to AuthFromScratch
-    }), function(req, res){
-});
+        successRedirect: "/profile",
+        failureRedirect: "/login",
+        failureFlash: true
+}));
 
 // log out the user
 router.get("/logout", function(req, res){

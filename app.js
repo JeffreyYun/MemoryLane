@@ -19,6 +19,7 @@ var time = require('time')(Date);
 var index = require('./routes/index');
 var Image = require("./models/image");
 var User = require("./models/user");
+require('./config/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,9 +60,7 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());       // determines subset user data to store in session (serialized user)
-passport.deserializeUser(User.deserializeUser());   // matches key to user, passing entire user object
+
 
 // middleware, passes currentUser to all routes
 app.use(function(req, res, next){

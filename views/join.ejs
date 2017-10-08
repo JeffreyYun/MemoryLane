@@ -1,26 +1,27 @@
 <% include ./partials/header %>
 
-    <div class="container">
+<h1 align="center"> Create a MemoryLane Account </h1>
+    <div class="container" >
         <div class="row">
-            <h1 align="center"> Create a MemoryLane Account </h1>
-            <br>
-            <form class="form-login" action="/join" method="POST" align="center">
-                <div class="form-group">
-                    <label for="username"> Username </label>
-                    <input class="form-control" type="text" id="username" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="password"> Password </label>
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Password">
-                </div>
-    <!--             <div class="form-group">
-                    <label for="email"> Email Address </label>
-                    <input class="form-control" type="email" id="email" name="email" placeholder="Email Address">
-                </div> -->
-                <div class="form-group">
-                    <button class="btn btn-primary">Sign Up</button>
-                </div>
-            </form>
+            <div class="text-center" id="form-register-block">
+                <form class="form-register" action="/join" method="POST" align="center">
+                    <!--             <div class="form-group">
+                        <label for="email"> Email Address </label>
+                        <input class="form-control" type="email" id="email" name="email" placeholder="Email Address">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="username"> Username </label>
+                        <input class="form-control" type="text" id="username" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"> Password </label>
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
