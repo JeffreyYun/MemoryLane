@@ -11,3 +11,4 @@
 * Public and private memories
 * Minimalistic interface
 
+### utilizes image-copying-server.herokuapp.com
