@@ -88,10 +88,10 @@ io.sockets.on('connection', function (socket) {
     var buf = new Buffer(url, 'base64');
     var imgNewURL=data.name+now.toString().replace(/\s|\:|\(|\)|\-/g, '')+'.png'
     fs.writeFile('./public/pictures/'+imgNewURL, buf);
-    fs.appendFile('./public/pictures/info.txt', data.name+";"+data.loc+";"+now.toString()+";"+imgNewURL+'\n');
+    fs.appendFile('./public/pictures/info.txt', data.name+";"+data.loc+";"+
+        now.toString()+";"+imgNewURL+";"+data.desc+'\n');
   });
 });
-
 
 
 server.listen(process.env.PORT, process.env.IP,function(){

@@ -1,21 +1,48 @@
 
 <% include ./partials/header %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div id="labels_box">
       <div id="labels">
 
       </div>
     </div>
-
     <div id="video_box">
 
-        <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video><br>
-        <button id="snap">Snap Photo</button>
-        <canvas id="canvas" width="640" height="480"></canvas>
-
-        <p id="location"></p>
-
+       <video id="video" autoplay="autoplay" width="640" height="480" autoplay>Video stream not available on your browser. Try an updated version of chrome or firefox.</video><br>
+ <button id="snap">Snap Photo</button>
     </div>
+
+     <div id='picture_wrapper' style='display:none;'>
+
+   <canvas id="canvas" width="640" height="480"></canvas>
+      <div style='display:block;'>
+
+  <div style='width:70%;margin:auto;padding-top:4px;' class="input-group input-group-lg">
+  <span class="input-group-addon" id="sizing-addon1">Title</span>
+  <input  id='image_title_input' type="text" class="form-control" placeholder="What are you doing?" aria-describedby="sizing-addon1">
+</div>
+
+</div>
+        <button id='save_img_button' class="btn btn-success" style="margin:10px;" >
+ <i  style='padding-right:4px;'class="fa fa-check"></i>Save</button>
+   <button id='delete_img_button' class="btn btn-info" >
+ <i  style='padding-right:4px;'class="fa fa-trash-o"></i>Delete</button>
+  </div>
+
+   </div>
+
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+     <script>
+
+    $("#delete_img_button").on('click',function(){
+        $("#picture_wrapper").css({'display':'none'})
+        $("#video_box").css({'display':'block'})
+    })
+
+
+     </script>
 
     <!--- Built in to client by socket.io -->
     <script src="/socket.io/socket.io.js"></script>
