@@ -2,8 +2,6 @@ var video, canvas, context, labels, socket, name, loc, my_username;
 
 
 window.onload = function(){
-    //for heroku builds
-    //var target="https://image-classifier-bot.herokuapp.com/"
     var target='http://localhost:3000'
     my_username='Jennie'
     // Grab elements, create settings, etc.
@@ -52,7 +50,7 @@ function access_video(){
 })
 
    $("#snap").on('click',function(){
-        context.drawImage(video, 0, 0,640,480);
+        context.drawImage(video, 0, 0, 640, 480);
         $("#picture_wrapper").css({'display':'block'})
         $("#video_box").css({'display':'none'})
     })
