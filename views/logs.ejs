@@ -1,21 +1,17 @@
-
 <% include ./partials/header %>
     <div id="labels_box">
       <div id="labels">
       </div>
     </div>
-    <div id="logs_box">
-      <br>
-      <h2>Logs</h2>
-      <br>
-      <p>
-      POST Memories Posts Here
-      </p>
-    </div>
+      <div id="logs_box">
+        <br>
+        <h2>Logs</h2>
+        <br>
+        <p>
+        POST Memories Posts Here
+        </p>
+      </div>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
-    <script  src="js/index.js"></script>
 
     <% var total = [] %>
     <% var data = result.split('\n') %>
@@ -26,11 +22,57 @@
             <% total.push(da) %>
      <% }  %>
 
+
+
       <div>
          <% for (var tat of total){ %>
             <img src=<%="pictures/"+tat[3]%> alt="Failed to display">
      <% } %>
      </div>
 
-  </body>
-</html>
+      <div id="map" style="width:500px;height:380px;"></div>
+
+
+
+      <script src="javascripts/MarkerClusterer.js"> </script>
+       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ3b4duXGP-7mSiQp-WG8DElJAE-bSs0M">  </script>
+
+    <script>
+    function getLocs(){
+          var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: 37.873, lng: -122.258}
+       });
+
+       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        result= <%- JSON.stringify(result) %>;
+
+        var locations = []
+        var data = result.split('\n')
+        data.splice(-1,1)
+        for (var dat of data){
+            var xy = dat.split(';')[1]
+            xy=xy.split(' ')
+            var newloc={lat:parseFloat(xy[0]), lng:parseFloat(xy[1])}%>
+
+            locations.push(newloc)
+        }
+
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+             position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+         var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'markers/m'});
+      }
+      getLocs();
+</script>
+
+
+
+<% include ./partials/footer %>
+
