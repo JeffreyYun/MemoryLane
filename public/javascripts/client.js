@@ -9,7 +9,6 @@ window.onload = function(){
     // Grab elements, create settings, etc.
     socket = io.connect(target);
     video = document.getElementById('video');
-    loc = document.getElementById("location");
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
     labels = document.getElementsByTagName('label');
@@ -41,16 +40,37 @@ function access_video(){
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
     context.drawImage(video, 0, 0, 640, 480);
+
     navigator.geolocation.getCurrentPosition(processPosition);
 
     function processPosition(position) {
-        //show in html5
-        loc.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
+        //let server know
+        let pos_str = position.coords.latitude +
+        " " + position.coords.longitude;
+        let img_desc = $('#input:textbox').val()
+        socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str, desc: img_desc} );
+    }
+    $("#picture_wrapper").css({'display':'block'})
+    $("#video_box").css({'display':'none'})
+});
+
+
+ $("#save_img_button").on('click',function(){
+    function processPosition(position) {
         //let server know
         let pos_str= position.coords.latitude +
         " " + position.coords.longitude;
         socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str } );
+        $("#picture_wrapper").css({'display':'none'})
+        $("#video_box").css({'display':'block'})
     }
-});
+    navigator.geolocation.getCurrentPosition(processPosition);
+})
+
+   $("$snap").on('click',function(){
+        context.drawImage(video, 0, 0, 640, 480);
+        $("#picture_wrapper").css({'display':'block'})
+        $("#video_box").css({'display':'none'})
+    })
+
 

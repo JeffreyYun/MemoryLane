@@ -1,50 +1,32 @@
 <% include ./partials/header %>
-    <div id="labels_box">
-      <div id="labels">
-      </div>
-    </div>
       <div id="logs_box">
         <br>
-        <h2>Logs</h2>
-        <br>
         <p>
-        POST Memories Posts Here
-        </p>
       </div>
 
-
-    <% var total = [] %>
-    <% var data = result.split('\n') %>
-    <% data.splice(-1,1) %>
-
-        <% for (var dat of data){ %>
-            <% da = dat.split(';') %>
-            <% total.push(da) %>
-     <% }  %>
-
-
-
-      <div>
-         <% for (var tat of total){ %>
-            <img src=<%="pictures/"+tat[3]%> alt="Failed to display">
-     <% } %>
      </div>
+     <div >
+      <div id="map" style="width:70%;height:60vh; margin:auto;"></div>
+      <div id='my_img_wrapper' style='width:35%;left:32%;top:29%; position:absolute; display:none;margin:auto;'>
+      <button id='close_img_button' style='width:30px;height:30px;position:relative;float:right;'class="close" aria-label="Close">
+  <span aria-hidden="true">&times;</span></button>
+        <img id='my_img' src='' style='width:100%;height:100%; position:relative;' alt="Failed to display">  </div>
+        <h3 >  </h3>
+    </div>
 
-      <div id="map" style="width:500px;height:380px;"></div>
-
-
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
       <script src="javascripts/MarkerClusterer.js"> </script>
        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ3b4duXGP-7mSiQp-WG8DElJAE-bSs0M">  </script>
-
     <script>
+
+    $("#close_img_button").on('click', function() {
+       $("#my_img_wrapper").css({'display':'none'})
+    });
     function getLocs(){
           var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           center: {lat: 37.873, lng: -122.258}
        });
-
-       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         result= <%- JSON.stringify(result) %>;
 
@@ -55,15 +37,19 @@
             var xy = dat.split(';')[1]
             xy=xy.split(' ')
             var newloc={lat:parseFloat(xy[0]), lng:parseFloat(xy[1])}%>
-
             locations.push(newloc)
         }
 
         var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
+            var mark= new google.maps.Marker({
              position: location,
-            label: labels[i % labels.length]
-          });
+             label: data[i].split(';')[0][0]
+              });
+            mark.addListener('click', function() {
+               $("#my_img").attr('src','pictures/'+data[i].split(';')[3]);
+               $("#my_img_wrapper").css({'display':'block'})
+            });
+            return mark;
         });
 
          var markerCluster = new MarkerClusterer(map, markers,
@@ -71,7 +57,6 @@
       }
       getLocs();
 </script>
-
 
 
 <% include ./partials/footer %>
