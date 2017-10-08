@@ -175,6 +175,8 @@
          var picture_locs = new Set();
          var pictures = [];
          var pic_desc=[];
+         var names = [];
+         var dates = [];
 
           for (var i = 0, marker; marker = markers[i]; i++) {
             picture_locs.add(marker.getPosition().toString())
@@ -184,8 +186,11 @@
             var xy = locations[i];
             var xytransformed='('+xy.lat.toString()+', '+xy.lng.toString()+')'
             if(picture_locs.has(xytransformed)){
+                dates.push(data[i].split(';')[2])
+                names.push(data[i].split(';')[0])
                 pictures.push(data[i].split(';')[3])
                 pic_desc.push(data[i].split(';')[4])
+
             }
           }
           var others=$("#other_images")
@@ -196,7 +201,8 @@
             imgHTML=`<div class='`+classes+ `'>
               <img class="d-block img-fluid" style='margin:auto;width:60%;' src='pictures/`+pictures[i]+ `'alt="failed to load">
               <div class="carousel-caption d-none d-md-block">
-                <h3>`+pic_desc[i]+ `</h3>
+                <h3>`+names[i]+ `</h3>
+                <p>`+dates[i].substring(0,15) +' ~ '+pic_desc[i]+ `</p>
               </div>
             </div>`
             others.html(others.html()+ imgHTML)
