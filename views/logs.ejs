@@ -168,23 +168,24 @@
             {imagePath: 'markers/m'});
 
        google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+
         var markers = cluster.getMarkers();
         if(markers.length==0)
             return
-
          var picture_locs = new Set();
          var pictures = [];
          var pic_desc=[];
          var names = [];
          var dates = [];
-
           for (var i = 0, marker; marker = markers[i]; i++) {
-            picture_locs.add(marker.getPosition().toString())
+            var xy=marker.getPosition()
+            var pos='('+Math.round(xy.lat()*1000000)/1000000+', '+Math.round(xy.lng()*1000000)/1000000 +')'
+            picture_locs.add(pos)
           }
 
            for (var i = 0; i < locations.length; i++) {
             var xy = locations[i];
-            var xytransformed='('+xy.lat.toString()+', '+xy.lng.toString()+')'
+            var xytransformed='('+xy.lat.toString()+', '+xy.lng.toString() +')'
             if(picture_locs.has(xytransformed)){
                 dates.push(data[i].split(';')[2])
                 names.push(data[i].split(';')[0])
@@ -193,6 +194,7 @@
 
             }
           }
+
           var others=$("#other_images")
           others.html("")
           for (var i = 0; i < pictures.length; i++) {
