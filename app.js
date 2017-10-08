@@ -61,7 +61,6 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // middleware, passes currentUser to all routes
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
