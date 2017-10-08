@@ -1,18 +1,35 @@
 <% include ./partials/header %>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
       <div id="logs_box">
         <br>
         <p>
       </div>
 
      </div>
-     <div >
-      <div id="map" style="width:70%;height:60vh; margin:auto;"></div>
-      <div id='my_img_wrapper' style='width:35%;left:32%;top:29%; position:absolute; display:none;margin:auto;'>
-      <button id='close_img_button' style='width:30px;height:30px;position:relative;float:right;'class="close" aria-label="Close">
-  <span aria-hidden="true">&times;</span></button>
-        <img id='my_img' src='' style='width:100%;height:100%; position:relative;' alt="Failed to display">  </div>
-        <h3 >  </h3>
+
+<div class="container" style='width:70%;padding:0;'>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" style='background-color:#515c6d;' id="other_images" role="listbox">
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    < <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
     </div>
+    </div>
+
+<div id="map" style="width:70%;height:60vh; margin:auto;"></div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
       <script src="javascripts/MarkerClusterer.js"> </script>
@@ -22,38 +39,171 @@
     $("#close_img_button").on('click', function() {
        $("#my_img_wrapper").css({'display':'none'})
     });
+
+
+
+
     function getLocs(){
           var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
-          center: {lat: 37.873, lng: -122.258}
+          center: {lat: 37.873, lng: -122.258},
+            styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
        });
 
-        result= <%- JSON.stringify(result) %>;
+    var result= <%- JSON.stringify(result) %>;
+    var locations = []
+    var data = result.split('\n')
 
-        var locations = []
-        var data = result.split('\n')
+
         data.splice(-1,1)
         for (var dat of data){
             var xy = dat.split(';')[1]
             xy=xy.split(' ')
-            var newloc={lat:parseFloat(xy[0]), lng:parseFloat(xy[1])}%>
+            var x=Math.round(parseFloat(xy[0])*1000000)/1000000
+            var y=Math.round(parseFloat(xy[1])*1000000)/1000000
+            var newloc={lat:x, lng:y}
             locations.push(newloc)
         }
 
         var markers = locations.map(function(location, i) {
             var mark= new google.maps.Marker({
              position: location,
-             label: data[i].split(';')[0][0]
+             label: data[i].split(';')[0][0],
               });
             mark.addListener('click', function() {
-               $("#my_img").attr('src','pictures/'+data[i].split(';')[3]);
-               $("#my_img_wrapper").css({'display':'block'})
+            var others=$("#other_images")
+            imgHTML=`<div class='carousel-item active'>
+              <div class="carousel-caption d-none d-md-block">
+                <h3>`+data[i].split(';')[4]+ `</h3>
+              </div>
+              <img class="d-block img-fluid" style='margin:auto;' src='pictures/`+data[i].split(';')[3]+ `'alt="failed to load">
+            </div>`
+            others.html(imgHTML)
             });
             return mark;
         });
 
-         var markerCluster = new MarkerClusterer(map, markers,
+       //(37.8705031, -122.2515105)
+
+       var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'markers/m'});
+
+       google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+        var markers = cluster.getMarkers();
+        if(markers.length==0)
+            return
+
+         var picture_locs = new Set();
+         var pictures = [];
+         var pic_desc=[];
+
+          for (var i = 0, marker; marker = markers[i]; i++) {
+            picture_locs.add(marker.getPosition().toString())
+          }
+
+           for (var i = 0; i < locations.length; i++) {
+            var xy = locations[i];
+            var xytransformed='('+xy.lat.toString()+', '+xy.lng.toString()+')'
+            if(picture_locs.has(xytransformed)){
+                pictures.push(data[i].split(';')[3])
+                pic_desc.push(data[i].split(';')[4])
+            }
+          }
+          var others=$("#other_images")
+          others.html("")
+          for (var i = 0; i < pictures.length; i++) {
+            var classes="carousel-item"
+            if(i==0) classes="carousel-item active"
+            imgHTML=`<div class='`+classes+ `'>
+              <img class="d-block img-fluid" style='margin:auto;width:60%;' src='pictures/`+pictures[i]+ `'alt="failed to load">
+              <div class="carousel-caption d-none d-md-block">
+                <h3>`+pic_desc[i]+ `</h3>
+              </div>
+            </div>`
+            others.html(others.html()+ imgHTML)
+          }
+
+      });
+
       }
       getLocs();
 </script>

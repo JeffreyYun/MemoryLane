@@ -93,7 +93,6 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-
 server.listen(process.env.PORT, process.env.IP,function(){
   //console.log("App started on localhost:"+process.env.PORT);
 });

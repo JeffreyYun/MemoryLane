@@ -37,38 +37,22 @@ function access_video(){
   return false;
 }
 
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 640, 480);
-
-    navigator.geolocation.getCurrentPosition(processPosition);
-
-    function processPosition(position) {
-        //let server know
-        let pos_str = position.coords.latitude +
-        " " + position.coords.longitude;
-        let img_desc = $('#input:textbox').val()
-        socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str, desc: img_desc} );
-    }
-    $("#picture_wrapper").css({'display':'block'})
-    $("#video_box").css({'display':'none'})
-});
-
 
  $("#save_img_button").on('click',function(){
     function processPosition(position) {
         //let server know
         let pos_str= position.coords.latitude +
         " " + position.coords.longitude;
-        socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str } );
+        let img_desc = $('#image_title_input').val()
+        socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str, desc: img_desc} );
         $("#picture_wrapper").css({'display':'none'})
         $("#video_box").css({'display':'block'})
     }
     navigator.geolocation.getCurrentPosition(processPosition);
 })
 
-   $("$snap").on('click',function(){
-        context.drawImage(video, 0, 0, 640, 480);
+   $("#snap").on('click',function(){
+        context.drawImage(video, 0, 0,640,480);
         $("#picture_wrapper").css({'display':'block'})
         $("#video_box").css({'display':'none'})
     })
