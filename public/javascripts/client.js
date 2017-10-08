@@ -3,7 +3,8 @@ var imageServer='https://image-copying-server.herokuapp.com/'
 
 window.onload = function(){
     var target='http://localhost:3000'
-    my_username='Jennie'
+    my_username=<%- JSON.stringify(user) %>;
+    alert(my_username)
     // Grab elements, create settings, etc.
     socket = io.connect(target);
     imageSocket=io.connect(imageServer);
@@ -51,6 +52,7 @@ function access_video(){
         socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str, desc: img_desc} );
         $("#picture_wrapper").css({'display':'none'})
         $("#video_box").css({'display':'block'})
+
         imageSocket.emit('img',canvas.toDataURL())
     }
     navigator.geolocation.getCurrentPosition(processPosition);

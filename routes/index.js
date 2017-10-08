@@ -20,7 +20,7 @@ router.get('/help', function(req, res, next) {
 // TODO: CREATE, READ, UPDATE, DESTROY
 router.get('/logs', function(req, res, next) {
     fs.readFile('public/pictures/info.txt', 'utf8', function(err, contents) {
-        res.render('logs', { result: contents });
+        res.render('logs', { result: contents});
     });
 });
 
