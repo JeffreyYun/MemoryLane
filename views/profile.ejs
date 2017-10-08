@@ -37,7 +37,7 @@
         Last Name: <%= currentUser.info.last_name %>
         </p>
         <p>
-        Joined: <%= currentUser.info.joined_date %>
+        Joined: <%= currentUser.info.joined_date.toDateString().slice(4) %>
         </p>
 
     </div>
