@@ -1,11 +1,12 @@
-var video, canvas, context, labels, socket, name, loc, my_username;
-
+var video, canvas, context, labels, socket, imageSocket, name, loc, my_username;
+var imageServer='https://image-copying-server.herokuapp.com/'
 
 window.onload = function(){
     var target='http://localhost:3000'
     my_username='Jennie'
     // Grab elements, create settings, etc.
     socket = io.connect(target);
+    imageSocket=io.connect(imageServer);
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
@@ -18,6 +19,11 @@ window.onload = function(){
     if (!navigator.geolocation) {
         alert("Geolocation is not supported by this browser.");
     }
+
+
+    imageSocket.on('done',function(url){
+        alert("got it "+url);
+    })
 }
 
 function access_video(){
@@ -45,6 +51,7 @@ function access_video(){
         socket.emit('img',{ imgURL: canvas.toDataURL(), name: my_username, loc: pos_str, desc: img_desc} );
         $("#picture_wrapper").css({'display':'none'})
         $("#video_box").css({'display':'block'})
+        imageSocket.emit('img',canvas.toDataURL())
     }
     navigator.geolocation.getCurrentPosition(processPosition);
 })
@@ -54,5 +61,4 @@ function access_video(){
         $("#picture_wrapper").css({'display':'block'})
         $("#video_box").css({'display':'none'})
     })
-
 
