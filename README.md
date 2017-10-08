@@ -12,9 +12,9 @@
 * Minimalistic interface
 
 # Contributors (in last name alphabetical):
-Kyle Hess
-Kyle Wong
-Haoyu Yun
-Jennie Zheng
+* Kyle Hess
+* Kyle Wong
+* Haoyu Yun
+* Jennie Zheng
 
 ### utilizes image-copying-server.herokuapp.com
