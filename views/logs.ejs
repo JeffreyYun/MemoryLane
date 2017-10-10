@@ -41,8 +41,6 @@
     });
 
 
-
-
     function getLocs(){
           var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
@@ -153,8 +151,8 @@
             var others=$("#other_images")
             imgHTML=`<div class='carousel-item active'>
               <div class="carousel-caption d-none d-md-block">
-                <h3>`+data[i].split(';')[0][i]+ `</h3>
-                <p>`+data[i].split(';')[2].substring(0,15) +' ~ '+data[i].split(';')[4][i]+ `</p>
+                <h3>`+data[i].split(';')[0]+ `</h3>
+                <p>`+data[i].split(';')[2].substring(0,15) +' ~ '+data[i].split(';')[4]+ `</p>
               </div>
               <img class="d-block img-fluid" style='margin:auto;' src='pictures/`+data[i].split(';')[3]+ `'alt="failed to load">
             </div>`
