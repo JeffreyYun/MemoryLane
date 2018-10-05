@@ -6,6 +6,8 @@
 
 **Memory Lane** seeks to bring individuals together through shared experiences in shared places. Perhaps two individuals could resonate over some memory. Perhaps the collective significance of a place may increase through wider and deeper experiential records.
 
+For more information, please refer to the hackathon submission on Devpost [here](https://devpost.com/software/memory-lane-qnajsc): https://devpost.com/software/memory-lane-qnajsc
+
 * A geocaching of sorts for memories
 * Community-run
 * Public and private memories
